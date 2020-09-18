@@ -4,6 +4,8 @@ import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/common/screenutil/screenutil.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
 
+import 'logo.dart';
+
 // import 'logo.dart';
 
 class MovieAppBar extends StatelessWidget {
@@ -26,11 +28,11 @@ class MovieAppBar extends StatelessWidget {
               height: Sizes.dimen_12.h,
             ),
           ),
-          // Expanded(
-          //               child: Logo(
-          //     height: Sizes.dimen_14,
-          //   ),
-          // ),
+          Expanded(
+            child: Logo(
+              height: Sizes.dimen_14,
+            ),
+          ),
           IconButton(
             onPressed: () {},
             icon: Icon(

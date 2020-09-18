@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:movies_app/presentation/blocks/movie_backdrop/movie_backdrop_bloc.dart';
 // import 'package:flutter/rendering.dart';
 
 import '../../../domain/entities/movie_entity.dart';
@@ -14,9 +15,11 @@ part 'movie_carousel_state.dart';
 
 class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
   final GetTrending getTrending;
+  final MovieBackdropBloc movieBackdropBloc;
 
   MovieCarouselBloc({
     @required this.getTrending,
+    @required this.movieBackdropBloc,
   }) : super(MovieCarouselInitial());
 
   @override
@@ -28,6 +31,8 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
       yield moviesEither.fold(
         (l) => MovieCarouselError(),
         (movies) {
+          movieBackdropBloc
+              .add(MovieBackdropChangedEvent(movies[event.defaultIndex]));
           return MovieCarouselLoaded(
             movies: movies,
             defaultIndex: event.defaultIndex,
